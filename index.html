@@ -23,11 +23,20 @@
           <button class="nav-item" data-view="automation">자동화</button>
           <button class="nav-item" data-view="reports">리포트</button>
         </nav>
-        <div class="sync-card">
-          <span class="status-dot"></span>
-          <div>
-            <strong>마이프차 세션</strong>
-            <small>수동 로그인 기반, 오늘 09:10 동기화</small>
+        <div class="sync-stack">
+          <div class="sync-card" data-session="myfranchise">
+            <span class="status-dot"></span>
+            <div>
+              <strong>마이프차 세션</strong>
+              <small>상태 확인 중…</small>
+            </div>
+          </div>
+          <div class="sync-card" data-session="naver_realestate">
+            <span class="status-dot"></span>
+            <div>
+              <strong>네이버 부동산 세션</strong>
+              <small>상태 확인 중…</small>
+            </div>
           </div>
         </div>
       </aside>
@@ -137,10 +146,43 @@
               </div>
             </div>
             <div class="strategy-list">
-              <label>지역 <select><option>강남 · 성수 · 판교</option></select></label>
-              <label>보증금 <input type="range" min="3000" max="20000" value="12000" /></label>
-              <label>월세 <input type="range" min="100" max="900" value="550" /></label>
-              <label>업종 <select><option>카페 / 디저트</option><option>외식</option><option>서비스</option></select></label>
+              <label>
+                <span class="strategy-label">지역 <em id="strategyRegionValue">전체</em></span>
+                <select id="strategyRegion">
+                  <option value="">전체</option>
+                  <option value="강남">강남</option>
+                  <option value="성수">성수</option>
+                  <option value="성동">성수/성동</option>
+                  <option value="마포">홍대/마포</option>
+                  <option value="성남">판교/성남</option>
+                  <option value="부산">부산</option>
+                </select>
+              </label>
+              <label>
+                <span class="strategy-label">보증금 상한 <em id="strategyDepositValue">1.2억</em></span>
+                <input type="range" min="3000" max="20000" step="500" value="12000" id="strategyDeposit" />
+              </label>
+              <label>
+                <span class="strategy-label">월세 상한 <em id="strategyRentValue">550만</em></span>
+                <input type="range" min="100" max="900" step="10" value="550" id="strategyRent" />
+              </label>
+              <label>
+                <span class="strategy-label">선호 면적 <em id="strategyAreaValue">45㎡</em></span>
+                <input type="range" min="20" max="120" step="1" value="45" id="strategyArea" />
+              </label>
+              <label>
+                <span class="strategy-label">업종</span>
+                <select id="strategyBusinessType">
+                  <option value="">전체</option>
+                  <option value="카페">카페/디저트</option>
+                  <option value="외식">외식</option>
+                  <option value="서비스">서비스</option>
+                </select>
+              </label>
+            </div>
+            <div class="strategy-actions">
+              <button class="primary-button small" id="searchNaverBtn" type="button">네이버 부동산 지도 열기</button>
+              <small class="subtle" id="strategySaveStatus">저장됨</small>
             </div>
           </article>
 
@@ -164,7 +206,7 @@
               <h3>모바일 후보 검토</h3>
               <p>강남역 2번 출구 코너</p>
               <strong>92점</strong>
-              <button class="primary-button small">메모 남기기</button>
+              <button class="primary-button small" id="mobileMemoBtn">메모 남기기</button>
             </div>
           </article>
         </section>

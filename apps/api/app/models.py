@@ -67,3 +67,15 @@ class AutomationRun(Base):
     message: Mapped[str] = mapped_column(Text, default="")
     screenshot_path: Mapped[str] = mapped_column(String(500), default="")
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+
+
+class Strategy(Base):
+    __tablename__ = "strategies"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    region: Mapped[str] = mapped_column(String(80), default="")
+    business_type: Mapped[str] = mapped_column(String(80), default="")
+    max_deposit: Mapped[float | None] = mapped_column(Float, nullable=True)
+    max_rent: Mapped[float | None] = mapped_column(Float, nullable=True)
+    preferred_area: Mapped[float | None] = mapped_column(Float, nullable=True)
+    updated_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
