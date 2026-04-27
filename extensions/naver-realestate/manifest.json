@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Franchise Field OS — 네이버 부동산 매물 등록",
+  "version": "0.1.0",
+  "description": "네이버 부동산에서 보고 있는 매물을 Franchise Field OS 후보로 등록합니다. (사용자 트리거 단건 등록만 수행)",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "후보 매물 등록"
+  },
+  "permissions": ["activeTab", "scripting", "storage"],
+  "host_permissions": [
+    "https://land.naver.com/*",
+    "https://new.land.naver.com/*",
+    "https://m.land.naver.com/*",
+    "http://127.0.0.1:8000/*",
+    "http://localhost:8000/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://land.naver.com/*",
+        "https://new.land.naver.com/*",
+        "https://m.land.naver.com/*"
+      ],
+      "js": ["selectors.js", "content.js", "overlay.js"],
+      "css": ["overlay.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

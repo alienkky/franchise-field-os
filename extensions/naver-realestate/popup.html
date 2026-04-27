@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header class="popup-header">
+      <strong>후보 매물 등록</strong>
+      <small id="pageHint">네이버 부동산 페이지 확인 중…</small>
+    </header>
+    <section class="strategy-chips" id="strategyChips" hidden>
+      <small class="chip-title">현재 출점 조건</small>
+      <div class="chip-list" id="chipList"></div>
+    </section>
+
+    <div class="mode-tabs" id="modeTabs" hidden>
+      <button type="button" data-mode="list" class="active">리스트</button>
+      <button type="button" data-mode="detail">상세</button>
+    </div>
+
+    <section id="listMode" class="list-mode" hidden>
+      <div class="list-toolbar">
+        <label class="select-all"><input type="checkbox" id="selectAll" /> 전체 선택</label>
+        <small id="listCount">0건</small>
+      </div>
+      <ul class="list-items" id="listItems"></ul>
+      <p id="listStatus" class="status"></p>
+      <div class="actions">
+        <button type="button" id="refreshList" class="ghost">재추출</button>
+        <button type="button" id="bulkSubmit" class="primary">선택 0건 등록</button>
+      </div>
+    </section>
+
+    <form id="listingForm" class="detail-mode" novalidate hidden>
+      <label>매물명<input name="title" required autocomplete="off" /></label>
+      <label>지역<input name="region" required placeholder="예: 서울 강남" autocomplete="off" /></label>
+      <label>주소<input name="address" autocomplete="off" /></label>
+      <div class="row">
+        <label>보증금(만)<input name="deposit" type="number" min="0" step="100" /></label>
+        <label>월세(만)<input name="monthly_rent" type="number" min="0" step="10" /></label>
+      </div>
+      <div class="row">
+        <label>권리금(만)<input name="premium" type="number" min="0" step="100" /></label>
+        <label>면적(㎡)<input name="area_m2" type="number" min="0" step="0.1" /></label>
+      </div>
+      <label>업종<input name="business_type" autocomplete="off" placeholder="예: 카페/디저트" /></label>
+      <p id="status" class="status"></p>
+      <div class="actions">
+        <button type="button" id="extractAgain" class="ghost">재추출</button>
+        <button type="submit" id="submitBtn" class="primary">후보 등록</button>
+      </div>
+    </form>
+
+    <details class="api-config">
+      <summary>API 서버</summary>
+      <div class="row">
+        <input id="apiBaseInput" type="text" />
+        <button type="button" id="apiBaseSave" class="ghost">저장</button>
+      </div>
+    </details>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

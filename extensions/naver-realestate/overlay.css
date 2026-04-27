@@ -1,0 +1,69 @@
+#ffos-overlay {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  width: 280px;
+  padding: 12px 14px;
+  background: rgba(255, 253, 247, 0.97);
+  border: 1px solid #ded8c8;
+  border-left: 4px solid #17483a;
+  border-radius: 8px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  z-index: 99999;
+  font-family: "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
+  color: #20231e;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+#ffos-overlay header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+#ffos-overlay strong {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+#ffos-overlay .ffos-close {
+  border: 0;
+  background: transparent;
+  font-size: 18px;
+  color: #727469;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+}
+
+#ffos-overlay .ffos-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+#ffos-overlay .ffos-chips span {
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #f1ede0;
+  border: 1px solid #ded8c8;
+  font-weight: 700;
+  font-size: 11px;
+}
+
+#ffos-overlay .ffos-hint {
+  display: block;
+  color: #727469;
+  font-size: 11px;
+}
+
+#ffos-overlay.is-mini {
+  width: auto;
+  padding: 8px 12px;
+  border-left-width: 4px;
+}
+#ffos-overlay.is-mini .ffos-chips,
+#ffos-overlay.is-mini .ffos-hint { display: none; }
