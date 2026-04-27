@@ -32,3 +32,14 @@ class ScoredCandidateRead(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class ImportResult(BaseModel):
+    imported: int
+    skipped: int
+    message: str
+
+
+class ReportResult(BaseModel):
+    report_path: str
+    row_count: int

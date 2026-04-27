@@ -6,6 +6,8 @@
 
 - 휴대폰과 PC에서 동작하는 정적 MVP 대시보드
 - 후보 매물 리스트, 상세 패널, 전략 조건, 자동화 로그, 모바일 검토 카드
+- 후보 매물 CSV/엑셀 업로드용 FastAPI 초안
+- 후보 매물 엑셀 리포트 생성 API 초안
 - VS Code, GitHub, Claude Code, Codex 협업을 위한 문서 구조
 - 향후 Next.js, FastAPI, Playwright 자동화로 확장 가능한 저장소 골격
 
@@ -16,11 +18,15 @@
 ## 권장 개발 단계
 
 1. 정적 MVP 화면 검토
-2. Next.js 프론트엔드로 이전
-3. FastAPI + PostgreSQL 데이터 모델 구현
-4. CSV/엑셀 업로드 기반 분석 기능 구현
+2. FastAPI 후보 매물 업로드와 리포트 생성 검증
+3. Next.js 프론트엔드로 이전
+4. PostgreSQL 전환과 점수 계산 고도화
 5. Playwright 기반 마이프차 B2B 브라우저 자동화 연결
 6. GitHub Actions, Claude Code, Codex 협업 흐름 구축
+
+## API 다음 단계
+
+자세한 실행 방법은 `docs/api-quickstart.md`를 확인하세요.
 
 ## 주의사항
 

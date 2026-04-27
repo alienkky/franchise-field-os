@@ -56,3 +56,14 @@ class ScoredCandidate(Base):
 
     property: Mapped[PropertyListing] = relationship()
     brand: Mapped[FranchiseBrand | None] = relationship()
+
+
+class AutomationRun(Base):
+    __tablename__ = "automation_runs"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    source: Mapped[str] = mapped_column(String(80), default="myfranchise")
+    status: Mapped[str] = mapped_column(String(40), default="pending")
+    message: Mapped[str] = mapped_column(Text, default="")
+    screenshot_path: Mapped[str] = mapped_column(String(500), default="")
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
