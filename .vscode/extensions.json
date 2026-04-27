@@ -1,5 +1,6 @@
 {
   "recommendations": [
+    "openai.chatgpt",
     "anthropic.claude-code",
     "github.vscode-github-actions",
     "ms-python.python",

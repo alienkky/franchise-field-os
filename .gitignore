@@ -3,10 +3,15 @@ node_modules/
 .env.local
 __pycache__/
 .venv/
+.pydeps/
+.playwright/
+.tmp/
 *.db
 data/uploads/*
 data/reports/*
 data/screenshots/*
+data/browser-profile/*
 !data/uploads/.gitkeep
 !data/reports/.gitkeep
 !data/screenshots/.gitkeep
+!data/browser-profile/.gitkeep

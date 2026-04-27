@@ -1,0 +1,32 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "API: FastAPI (Uvicorn)",
+      "type": "python",
+      "request": "launch",
+      "module": "uvicorn",
+      "args": [
+        "app.main:app",
+        "--reload"
+      ],
+      "cwd": "${workspaceFolder}/apps/api",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/apps/api"
+      },
+      "justMyCode": true
+    },
+    {
+      "name": "Automation: main.py",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/apps/automation/main.py",
+      "cwd": "${workspaceFolder}/apps/automation",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/apps/automation",
+        "PLAYWRIGHT_BROWSERS_PATH": "${workspaceFolder}/.playwright"
+      },
+      "justMyCode": true
+    }
+  ]
+}
