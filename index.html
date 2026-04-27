@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Franchise Field OS</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Primary">
+        <div class="brand">
+          <span class="brand-mark">F</span>
+          <div>
+            <strong>Field OS</strong>
+            <small>가맹개발 전략관리</small>
+          </div>
+        </div>
+        <nav class="nav-list">
+          <button class="nav-item active" data-view="dashboard">대시보드</button>
+          <button class="nav-item" data-view="strategy">전략 조건</button>
+          <button class="nav-item" data-view="candidates">후보 매물</button>
+          <button class="nav-item" data-view="automation">자동화</button>
+          <button class="nav-item" data-view="reports">리포트</button>
+        </nav>
+        <div class="sync-card">
+          <span class="status-dot"></span>
+          <div>
+            <strong>마이프차 세션</strong>
+            <small>수동 로그인 기반, 오늘 09:10 동기화</small>
+          </div>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">2026.04.27 월요일</p>
+            <h1>상권 후보 전략 보드</h1>
+          </div>
+          <div class="topbar-actions">
+            <button class="ghost-button" id="mobilePreviewBtn">모바일 보기</button>
+            <button class="primary-button" id="runAutomationBtn">자동화 실행</button>
+          </div>
+        </header>
+
+        <section class="kpi-grid" aria-label="KPI">
+          <article class="metric-card">
+            <span>신규 후보</span>
+            <strong>38</strong>
+            <small>전주 대비 +12</small>
+          </article>
+          <article class="metric-card">
+            <span>고득점 매물</span>
+            <strong>11</strong>
+            <small>85점 이상</small>
+          </article>
+          <article class="metric-card">
+            <span>평균 월세</span>
+            <strong>412만</strong>
+            <small>핵심 지역 기준</small>
+          </article>
+          <article class="metric-card">
+            <span>검토 대기</span>
+            <strong>7</strong>
+            <small>담당자 배정 필요</small>
+          </article>
+        </section>
+
+        <section class="content-grid">
+          <section class="panel main-panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Pipeline</p>
+                <h2>우선 검토 후보</h2>
+              </div>
+              <div class="segmented">
+                <button class="active" data-filter="all">전체</button>
+                <button data-filter="hot">고득점</button>
+                <button data-filter="pending">대기</button>
+              </div>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>후보지</th>
+                    <th>지역</th>
+                    <th>비용</th>
+                    <th>면적</th>
+                    <th>담당자</th>
+                    <th>상태</th>
+                    <th>점수</th>
+                  </tr>
+                </thead>
+                <tbody id="candidateRows"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <aside class="panel detail-panel" aria-live="polite">
+            <div class="panel-header compact">
+              <div>
+                <p class="eyebrow">Selected</p>
+                <h2 id="detailTitle">강남역 2번 출구 코너</h2>
+              </div>
+              <span class="score-pill" id="detailScore">92</span>
+            </div>
+            <dl class="detail-list">
+              <div>
+                <dt>브랜드 적합도</dt>
+                <dd id="detailFit">카페/디저트 최적</dd>
+              </div>
+              <div>
+                <dt>조건</dt>
+                <dd id="detailCost">보증금 1.2억 · 월세 580만</dd>
+              </div>
+              <div>
+                <dt>영업 메모</dt>
+                <dd id="detailMemo">점심 유동 강함, 권리금 협상 필요</dd>
+              </div>
+            </dl>
+            <div class="action-row">
+              <button class="primary-button small" id="approveBtn">검토 완료</button>
+              <button class="ghost-button small" id="assignBtn">담당 배정</button>
+            </div>
+          </aside>
+        </section>
+
+        <section class="lower-grid">
+          <article class="panel">
+            <div class="panel-header compact">
+              <div>
+                <p class="eyebrow">Strategy</p>
+                <h2>출점 조건</h2>
+              </div>
+            </div>
+            <div class="strategy-list">
+              <label>지역 <select><option>강남 · 성수 · 판교</option></select></label>
+              <label>보증금 <input type="range" min="3000" max="20000" value="12000" /></label>
+              <label>월세 <input type="range" min="100" max="900" value="550" /></label>
+              <label>업종 <select><option>카페 / 디저트</option><option>외식</option><option>서비스</option></select></label>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-header compact">
+              <div>
+                <p class="eyebrow">Automation</p>
+                <h2>실행 로그</h2>
+              </div>
+            </div>
+            <ol class="log-list" id="logList">
+              <li><strong>09:10</strong> 마이프차 B2B 화면 데이터 정리 완료</li>
+              <li><strong>09:13</strong> 중복 후보 4건 제외</li>
+              <li><strong>09:16</strong> 주간 리포트 생성 완료</li>
+            </ol>
+          </article>
+
+          <article class="panel mobile-card" id="mobilePreview">
+            <div class="phone-frame">
+              <div class="phone-top"></div>
+              <h3>모바일 후보 검토</h3>
+              <p>강남역 2번 출구 코너</p>
+              <strong>92점</strong>
+              <button class="primary-button small">메모 남기기</button>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+node_modules/
+.env
+.env.local
+__pycache__/
+.venv/
+data/uploads/*
+data/reports/*
+data/screenshots/*
+!data/uploads/.gitkeep
+!data/reports/.gitkeep
+!data/screenshots/.gitkeep
