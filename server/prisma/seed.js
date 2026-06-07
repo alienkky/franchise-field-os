@@ -151,11 +151,6 @@ async function main() {
     { categoryId: categories.labor, name: '설치 관리비', unit: 'set', unitPrice: 500000, description: '현장 감리 및 관리비', isRequired: true, width: null, height: null },
   ];
 
-  // NOTE: 기본 아이템 시드는 비활성화됨 — 현재 스키마(CategoryName enum)와 호환되지 않음.
-  // 대신 마스터가 '자재 시세 관리 → 강제 일괄반영' 버튼으로 시세 데이터에서 아이템을 자동 등록합니다.
-  const existingItemCount = await prisma.item.count();
-  console.log(`   Items seed skipped (${existingItemCount} existing items). Use 시세→강제 일괄반영 to populate from market prices.`);
-
   // Market prices (시세 데이터)
   const existingMarketCount = await prisma.marketPrice.count();
   if (existingMarketCount === 0) {
@@ -169,6 +164,54 @@ async function main() {
     console.log(`   Created ${marketRows.length} market prices`);
   } else {
     console.log(`   Skipped market prices (${existingMarketCount} already exist)`);
+  }
+
+  // Auto-create items from market prices when no items exist (force-sync-all logic)
+  const existingItemCount = await prisma.item.count();
+  if (existingItemCount === 0) {
+    console.log('   📦 No items found — auto-creating from market prices...');
+    const UNIT_MAP = {
+      '㎡': 'm2', 'm2': 'm2', 'm': 'm',
+      'EA': 'ea', 'ea': 'ea', '식': 'set', 'set': 'set',
+      '인/일': 'day', 'day': 'day', '박스': 'box', 'box': 'box',
+      '통': 'unit', '매': 'unit',
+    };
+
+    const marketPrices = await prisma.marketPrice.findMany({ where: { isActive: true } });
+    let created = 0;
+    let skipped = 0;
+
+    for (const mp of marketPrices) {
+      const unit = UNIT_MAP[mp.unit];
+      if (!unit) { skipped++; continue; }
+
+      // Ensure category exists
+      const cat = await prisma.category.upsert({
+        where: { name: mp.category },
+        update: { isActive: true },
+        create: { name: mp.category, isActive: true },
+      });
+
+      const newPrice = mp.avgPrice || Math.round((mp.minPrice + mp.maxPrice) / 2);
+
+      const newItem = await prisma.item.create({
+        data: {
+          categoryId: cat.id,
+          name: mp.name,
+          brand: mp.brand,
+          unit,
+          unitPrice: newPrice,
+          description: mp.spec || null,
+          isRequired: false,
+          version: '1.0.0',
+        },
+      });
+      await prisma.marketPrice.update({ where: { id: mp.id }, data: { linkedItemId: newItem.id } });
+      created++;
+    }
+    console.log(`   ✅ Created ${created} items from market prices${skipped > 0 ? `, ${skipped} skipped` : ''}`);
+  } else {
+    console.log(`   Items: ${existingItemCount} existing — skip auto-create`);
   }
 
   console.log('✅ Seed completed!');
